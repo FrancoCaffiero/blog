@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import propTypes from 'prop-types';
 
-const AddCommentForm = ({ articleName, articleInfo, setArticleInfo }) => {
+const AddCommentForm = ({ articleId, articleInfo, setArticleInfo }) => {
     const [username, setUsername] = useState('');
     const [commentText, setCommentText] = useState('');
 
     const addComment = async () => {
         articleInfo.comments.push({ username, text: commentText });
-        const result = await fetch(`/api/article/${articleName}`, {
+        const result = await fetch(`/api/article/${articleId}`, {
             method: 'PUT',
             body: JSON.stringify(articleInfo),
             headers: {
@@ -37,7 +37,7 @@ const AddCommentForm = ({ articleName, articleInfo, setArticleInfo }) => {
 };
 
 AddCommentForm.propTypes = {
-    articleName: propTypes.string,
+    articleId: propTypes.string,
     articleInfo: propTypes.object,
     setArticleInfo: propTypes.func
 };

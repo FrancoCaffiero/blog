@@ -9,14 +9,13 @@ import AddCommentForm from '../components/AddCommentForm';
 import NotFoundPage from './NotFoundPage';
 
 const ArticlePage = ({ match }) => {
-    const name = match.params.name;
-
+    const id = match.params.id;
     const [otherArticles, setOtherArticles] = useState([{}]);
     const [articleInfo, setArticleInfo] = useState({});
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await fetch(`/api/article/${name}`);
+            const result = await fetch(`/api/article/${id}`);
             const body = await result.json();
 
             setArticleInfo(body);
@@ -25,11 +24,11 @@ const ArticlePage = ({ match }) => {
                 const result2 = await fetch('/api/articles');
                 const body2 = await result2.json();
 
-                setOtherArticles(body2.filter(article => article.title !== body.title));
+                setOtherArticles(body2.filter(article => article._id !== body._id));
             };
         };
         fetchData();
-    }, [name]);
+    }, [id]);
 
     if (!articleInfo) return <NotFoundPage />;
 
@@ -37,9 +36,9 @@ const ArticlePage = ({ match }) => {
         <>
             <h1>{articleInfo.title}</h1>
             <p>{articleInfo.articleBody}</p>
-            <UpvotesSection articleName = {name} articleInfo = {articleInfo} setArticleInfo = {setArticleInfo} />
+            <UpvotesSection articleId = {id} articleInfo = {articleInfo} setArticleInfo = {setArticleInfo} />
             <CommentsList comments = {articleInfo.comments} />
-            <AddCommentForm articleName = {name} articleInfo = {articleInfo} setArticleInfo = {setArticleInfo} />
+            <AddCommentForm articleId = {id} articleInfo = {articleInfo} setArticleInfo = {setArticleInfo} />
             <h3>Other articles</h3>
             <ArticlesList articles = {otherArticles} />
         </>
@@ -49,7 +48,7 @@ const ArticlePage = ({ match }) => {
 ArticlePage.propTypes = {
     match: propTypes.shape({
         params: propTypes.shape({
-            name: propTypes.string
+            id: propTypes.string
         })
     })
 };

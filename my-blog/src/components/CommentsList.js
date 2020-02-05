@@ -16,12 +16,12 @@ const CommentsList = ({ comments = [] }) => {
 };
 
 CommentsList.propTypes = {
-    comments: propTypes.arrayOf({
-        comment: propTypes.shape({
+    comments: propTypes.arrayOf(
+        propTypes.shape({
             username: propTypes.string,
             text: propTypes.string
         })
-    })
+    )
 };
 
 export default CommentsList;

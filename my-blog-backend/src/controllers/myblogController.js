@@ -17,8 +17,8 @@ export const getArticles = (req, res) => {
     });
 };
 
-export const getArticleByTitle = (req, res) => {
-    Article.findOne({ title: req.params.title }, (err, article) => {
+export const getArticleById = (req, res) => {
+    Article.findOne({ _id: req.params.id }, (err, article) => {
         if (err) {
             res.send(err);
         }
@@ -26,9 +26,9 @@ export const getArticleByTitle = (req, res) => {
     });
 };
 
-export const updateArticleByTitle = (req, res) => {
+export const updateArticleById = (req, res) => {
     Article.findOneAndUpdate(
-        { title: req.params.title },
+        { _id: req.params.id },
         req.body,
         { new: true, useFindAndModify: false },
         (err, article) => {
@@ -40,8 +40,8 @@ export const updateArticleByTitle = (req, res) => {
     );
 };
 
-export const deleteArticleByTitle = (req, res) => {
-    Article.findOneAndRemove({ title: req.params.title }, (err) => {
+export const deleteArticleById = (req, res) => {
+    Article.findOneAndRemove({ _id: req.params.id }, (err) => {
         if (err) {
             res.send(err);
         }

@@ -2,9 +2,9 @@ import {
     getHomePage,
     getArticles,
     addNewArticle,
-    getArticleByTitle,
-    updateArticleByTitle,
-    deleteArticleByTitle,
+    getArticleById,
+    updateArticleById,
+    deleteArticleById,
 } from '../controllers/myblogController';
 
 
@@ -16,10 +16,10 @@ const routes = (app) => {
         .get(getArticles);
 
 
-    app.route('/api/article/:title')
-        .get(getArticleByTitle)
-        .put(updateArticleByTitle)
-        .delete(deleteArticleByTitle);
+    app.route('/api/article/:id')
+        .get(getArticleById)
+        .put(updateArticleById)
+        .delete(deleteArticleById);
 
 
     app.route('/api/article/add-article')

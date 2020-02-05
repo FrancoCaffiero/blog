@@ -1,10 +1,10 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-const UpvotesSection = ({ articleName, articleInfo, setArticleInfo }) => {
+const UpvotesSection = ({ articleId, articleInfo, setArticleInfo }) => {
     const upvoteArticle = async () => {
         articleInfo.upvotes += 1;
-        const result = await fetch(`/api/article/${articleName}`, {
+        const result = await fetch(`/api/article/${articleId}`, {
             method: 'PUT',
             body: JSON.stringify(articleInfo),
             headers: {
@@ -23,7 +23,7 @@ const UpvotesSection = ({ articleName, articleInfo, setArticleInfo }) => {
 };
 
 UpvotesSection.propTypes = {
-    articleName: propTypes.string,
+    articleId: propTypes.string,
     articleInfo: propTypes.object,
     setArticleInfo: propTypes.func
 };
