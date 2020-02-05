@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import propTypes from 'prop-types';
 
 const AddCommentForm = ({ articleName, articleInfo, setArticleInfo }) => {
     const [username, setUsername] = useState('');
@@ -10,14 +11,14 @@ const AddCommentForm = ({ articleName, articleInfo, setArticleInfo }) => {
             method: 'PUT',
             body: JSON.stringify(articleInfo),
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             }
         });
         const body = await result.json();
         setArticleInfo(body);
         setUsername('');
         setCommentText('');
-    }
+    };
 
     return (
         <div id="add-comment-form">
@@ -32,7 +33,13 @@ const AddCommentForm = ({ articleName, articleInfo, setArticleInfo }) => {
             </label>
             <button onClick={() => addComment()} >Add Comment</button>
         </div>
-    )
+    );
+};
+
+AddCommentForm.propTypes = {
+    articleName: propTypes.string,
+    articleInfo: propTypes.object,
+    setArticleInfo: propTypes.func
 };
 
 export default AddCommentForm;

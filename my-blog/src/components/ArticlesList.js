@@ -1,4 +1,5 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 const ArticlesList = ({ articles }) => (
@@ -11,5 +12,14 @@ const ArticlesList = ({ articles }) => (
         ))}
     </>
 );
+
+ArticlesList.propTypes = {
+    articles: propTypes.arrayOf({
+        article: propTypes.shape({
+            title: propTypes.string,
+            articleBody: propTypes.string
+        })
+    })
+};
 
 export default ArticlesList;

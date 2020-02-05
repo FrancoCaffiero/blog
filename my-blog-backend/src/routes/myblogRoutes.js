@@ -1,31 +1,29 @@
-import { 
+import {
     getHomePage,
-    getArticles, 
-    addNewArticle, 
-    getArticleByTitle, 
+    getArticles,
+    addNewArticle,
+    getArticleByTitle,
     updateArticleByTitle,
     deleteArticleByTitle,
-} from "../controllers/myblogController";
+} from '../controllers/myblogController';
 
 
 const routes = (app) => {
-
     app.route('/')
-    .get(getHomePage)
+        .get(getHomePage);
 
     app.route('/api/articles')
-    .get(getArticles);
+        .get(getArticles);
 
 
     app.route('/api/article/:title')
-    .get(getArticleByTitle)
-    .put(updateArticleByTitle)
-    .delete(deleteArticleByTitle);
+        .get(getArticleByTitle)
+        .put(updateArticleByTitle)
+        .delete(deleteArticleByTitle);
 
 
     app.route('/api/article/add-article')
-    .post(addNewArticle)
-
-}
+        .post(addNewArticle);
+};
 
 export default routes;

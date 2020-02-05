@@ -1,42 +1,39 @@
 import React, { useState, useEffect } from 'react';
+import propTypes from 'prop-types';
 
 import ArticlesList from '../components/ArticlesList';
 import CommentsList from '../components/CommentsList';
 import UpvotesSection from '../components/UpvotesSection';
 import AddCommentForm from '../components/AddCommentForm';
 
-import NotFoundPage from './NotFoundPage'
+import NotFoundPage from './NotFoundPage';
 
 const ArticlePage = ({ match }) => {
-
     const name = match.params.name;
-    
+
     const [otherArticles, setOtherArticles] = useState([{}]);
     const [articleInfo, setArticleInfo] = useState({});
 
     useEffect(() => {
-        const fetchData = async() => {
+        const fetchData = async () => {
             const result = await fetch(`/api/article/${name}`);
             const body = await result.json();
 
             setArticleInfo(body);
 
-            if (body){
-
-                const result2 = await fetch(`/api/articles`);
+            if (body) {
+                const result2 = await fetch('/api/articles');
                 const body2 = await result2.json();
-                
-                setOtherArticles(body2.filter(article => article.title !== body.title));
 
-            }
-            
-        }
+                setOtherArticles(body2.filter(article => article.title !== body.title));
+            };
+        };
         fetchData();
     }, [name]);
 
-    if (!articleInfo) return <NotFoundPage />
+    if (!articleInfo) return <NotFoundPage />;
 
-    return(
+    return (
         <>
             <h1>{articleInfo.title}</h1>
             <p>{articleInfo.articleBody}</p>
@@ -47,6 +44,14 @@ const ArticlePage = ({ match }) => {
             <ArticlesList articles = {otherArticles} />
         </>
     );
-}
+};
+
+ArticlePage.propTypes = {
+    match: propTypes.shape({
+        params: propTypes.shape({
+            name: propTypes.string
+        })
+    })
+};
 
 export default ArticlePage;

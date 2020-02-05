@@ -1,32 +1,32 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import helmet from 'helmet';
-import routes from './routes/myblogRoutes';
-import bodyParser from 'body-parser';
 import path from 'path';
 import cors from 'cors';
+import bodyParser from 'body-parser';
+import routes from './routes/myblogRoutes';
 
 const app = express();
 const PORT = 8000;
 
-//helmet setup
+//  helmet setup
 app.use(helmet());
 
-//mongoose conection
+//  mongoose conection
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/my-blog', {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
 });
 
-//bodyParser setup
+//  bodyParser setup
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-//cors setup
+//  cors setup
 app.use(cors());
 
-//serving static files
+//  serving static files
 app.use(express.static(path.join(__dirname, '/build')));
 
 routes(app);

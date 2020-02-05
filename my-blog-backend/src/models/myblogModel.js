@@ -1,50 +1,48 @@
 import mongoose from 'mongoose';
 
-const Schema = mongoose.Schema;
-
-const ArticleSchema = new Schema ({
+const ArticleSchema = new mongoose.Schema({
     title: {
-        type: String
+        type: String,
     },
     dateCreated: {
         type: Date,
-        default: Date.now
+        default: Date.now,
     },
     datePublished: {
         type: Date,
-        default: Date.now
+        default: Date.now,
     },
     dateModified: {
         type: Date,
-        default: Date.now
+        default: Date.now,
     },
     contentLocation: {
-        type: String
+        type: String,
     },
     author: {
-        type: String
+        type: String,
     },
     publisher: {
-        type: String
+        type: String,
     },
     tags: {
-        type: [String]
+        type: [String],
     },
     upvotes: {
-        type: Number
+        type: Number,
     },
     articleSection: {
-        type: String
+        type: String,
     },
     articleBody: {
-        type: String
+        type: String,
     },
     comments: {
         type: [{
             username: String,
-            text: String
-        }]
-    }
+            text: String,
+        }],
+    },
 });
 
 export default ArticleSchema;
